@@ -1,4 +1,5 @@
 import {CardBody, CardContainer, CardFooter} from '../Card/CardStyle'
+import { TextLimit } from '../TextLimit/TextLimit';
 
 export function Card(props) {
     return (
@@ -6,10 +7,11 @@ export function Card(props) {
             <CardBody>
             <div>
                 <h2>{props.title}</h2>
-                <p>{props.text}</p>
+                <img src={props.banner} alt="Imagem" />
             </div>
-            <img src={props.banner} alt="Imagem" />
+            <TextLimit text={props.text} limit={150} />
             </CardBody>
+
             <CardFooter>
             <div>
             <i className="bi bi-hand-thumbs-up"></i>
