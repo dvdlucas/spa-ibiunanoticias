@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllPost, getTopNews } from "../../../services/newsService.js";
+import { getAllNews, getTopNews } from "../../../services/newsService.js";
 import { Card } from "../../components/Card/Card";
 import { HomeBody, HomeHeader } from "./HomeStyled.jsx";
 
@@ -9,7 +9,7 @@ export default function Home(){
     const [topNews, setTopNews ] = useState({});
 
     async function findAllNews(){
-        const response = await getAllPost();
+        const response = await getAllNews();
         setNews(response.data.results);
 
         const topNews = await getTopNews();
