@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllNews, getTopNews } from "../../../services/newsService.js";
 import { Card } from "../../components/Card/Card";
 import { HomeBody, HomeHeader } from "./HomeStyled.jsx";
+import  Cookies  from "js-cookie";
 
 
 export default function Home(){
@@ -14,10 +15,10 @@ export default function Home(){
 
         const topNews = await getTopNews();
         setTopNews(topNews.data.news);
-        console.log(topNews.data.news)
     }
     useEffect(() => {
         findAllNews();
+        console.log(Cookies.get("token"));
     }, []);
     return (
     <>
