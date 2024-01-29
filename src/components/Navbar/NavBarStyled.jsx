@@ -68,7 +68,7 @@ export const ErrorSpan = styled.span`
     border-radius: 7px;
 `;
 
-export const userLoggedSpace = styled.div`
+export const UserLoggedSpace = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
