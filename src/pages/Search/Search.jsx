@@ -9,11 +9,11 @@ export function Search() {
   const [news, setNews] = useState([]);
 
   async function search() {
-    try{
-        const newsApi = await searchNews(title);
-        setNews(newsApi.data.results);
-    }catch (err){
-        setNews([]);
+    try {
+      const newsApi = await searchNews(title);
+      setNews(newsApi.data.results);
+    } catch (err) {
+      setNews([]);
     }
   }
 
@@ -21,30 +21,30 @@ export function Search() {
     search();
   }, [title]);
 
-  return ( 
-  <ContainerResult>
+  return (
+    <ContainerResult>
       <TextResult>
         <span>
           {news.length
             ? `Encontramos ${news.length} ${
-              news.length > 1 ? "resultados" : "resultado"
-            } para:`
+                news.length > 1 ? "resultados" : "resultado"
+              } para:`
             : "Não encontramos resultados para:"}
         </span>
         <h2>{title}</h2>
       </TextResult>
-          <SearchNews>
-          {news.map((item) => (
-            <Card 
-            key={item.id} 
-            title={item.title} 
+      <SearchNews>
+        {news.map((item) => (
+          <Card
+            key={item.id}
+            title={item.title}
             text={item.text}
             banner={item.banner}
             likes={item.likes}
             comments={item.comments}
-            />
-          ))}
-          </SearchNews>
-        </ContainerResult>
-  )
+          />
+        ))}
+      </SearchNews>
+    </ContainerResult>
+  );
 }

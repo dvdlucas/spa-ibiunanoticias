@@ -12,8 +12,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../Button/Button";
 import { searchSchema } from "../../schemas/SearchSchema";
 import { userLogged } from "../../../services/userService";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { UserContext } from "../../Context/UserContext";
 
 export function NavBar() {
   const {
@@ -25,7 +26,8 @@ export function NavBar() {
     resolver: zodResolver(searchSchema),
   });
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const {user, setUser} = useContext(UserContext);
+
 
   function onSearch(data) {
     const { title } = data;
@@ -42,7 +44,11 @@ export function NavBar() {
     }
   }
 
-  function signout() {}
+  function signout() {
+    Cookies.remove("token");
+    setUser(undefined);
+    navigate("/");
+  }
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
@@ -70,7 +76,9 @@ export function NavBar() {
 
         {user ? (
           <UserLoggedSpace>
-            <h2>{user.name}</h2>
+            <Link to="/profile" style={{textDecoration: 'none'}} >
+              <h2>{user.name}</h2>
+            </Link>
             <i className="bi bi-box-arrow-right" onClick={signout}></i>
           </UserLoggedSpace>
         ) : (
